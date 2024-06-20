@@ -1,0 +1,6 @@
+<%= form_with url: search_users_path, method: :post, turbo: true, id:"search-form" do |form| %>
+  <%= form.label 'Search Users' %>
+  <%= form.search_field :username, id:"search-field"%>
+<% end %>
+
+

@@ -1,0 +1,63 @@
+<%= form_with(model: @user, local: true, method: @method) do |form| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation" class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+      <h2 class="font-bold mb-2"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="space-y-4">
+    <div class="mb-4">
+      <%= form.label :photo, class: 'block text-gray-700' %>
+      <%= form.file_field :photo, class: 'w-full px-3 py-2 border rounded' %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :name, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.text_field :name, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :username, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.text_field :username, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :email, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.email_field :email, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :phone, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.phone_field :phone, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+    <!-- Address Fields -->
+    <div class="mb-4">
+      <%= form.label :street, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.text_field :street, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :suite, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.text_field :suite, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :city, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.text_field :city, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :zipcode, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.text_field :zipcode, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :lat, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.text_field :lat, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :lng, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.text_field :lng, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+    <div class="actions">
+      <%= form.submit 'Save', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+      
+    </div>
+  </div>
+<% end %>

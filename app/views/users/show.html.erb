@@ -1,0 +1,73 @@
+<div class="relative flex flex-col text-black shadow-xl">
+   <div class=" border rounded-xl h-[calc(100vh-2rem)]  max-w-[28rem] whitespace-wrap">
+      <div>
+         <%if @user.photo.present?%>
+                <div class="flex items-center justify-center">
+                    <div class="relative w-12 h-12 mr-3 rounded-full">
+        <%= image_tag @user.photo, class: "object-cover w-full h-full rounded-full" %>                      
+      <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                    </div>
+                  </div>
+                <% else %>
+               
+                  <div class="flex items-center justify-center">
+                    <div class="relative w-12 h-12 mr-3 rounded-full">
+                      <img class="object-cover w-full h-full rounded-full" src="<%= @user['photo_url'] %>" alt="User Image" loading="lazy" />
+                      <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                    </div>
+                  </div>
+                
+                <% end %>
+         <p class="flex items-center justify-center m-2 text-xl"><%= @user.name %></p>
+         <p class="flex items-center justify-center m-2 text-lg">@<%= @user.username %></p>
+         <p class="mt-4 ml-2"><strong>Email:</strong> <%= @user.email %></p>
+         <p class="ml-2 mt-2"><strong>Phone:</strong> <%= @user.phone %></p>
+         <p class="ml-2 mt-2"><strong>Address:</strong> <%= @user.full_address %></p>
+        <button id="edit-button" class="mt-4 ml-2 bg-blue-500 text-white px-4 py-2 rounded">Edit User</button>
+
+      </div>
+   </div>
+</div>
+<div class="w-full pt-5 px-4 mb-8 mx-auto h-[calc(100vh-2rem)] overflow-y-auto">
+<div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+   <div class="w-full overflow-x-auto">
+      <table class="w-full">
+         <thead>
+            <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+               <th class="px-4 py-3">Photo</th>
+               <th class="px-4 py-3">Title</th>
+            </tr>
+         </thead>
+         <tbody class="bg-white">
+            <% @albums.each do |album| %>
+            <tr class="text-gray-700 album-row hover:cursor-pointer" 
+               data-album="<%= album.to_json %>">
+               <td class="px-4 py-3 border ">
+                  <% if album['info'] %>
+                  <div class="flex items-center justify-center">
+                     <div class="relative w-24 h-24 mr-3 rounded-full">
+                        <img class="object-cover w-full h-full rounded-full" src="<%= album['info']['thumbnailUrl'] %>" alt="Album Image" loading="lazy" />
+                        <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                     </div>
+                  </div>
+                  <% else %>
+                  <p>No photo available</p>
+                  <% end %>
+               </td>
+               <td class="px-4 py-3 border"><%= album['title'] %></td>
+            </tr>
+            <% end %>
+         </tbody>
+      </table>
+   </div>
+</div>
+<div id="edit-user-modal" class="fixed inset-0 flex items-center justify-center z-50 hidden overflow-y-auto">
+  <div class="fixed inset-0 bg-black opacity-50"></div>
+  <div class="bg-white p-6 rounded-lg z-50 max-w-md w-full max-h-[90vh] overflow-y-auto">
+    <%= render 'form', user: @user, method: :put %>
+    <button id="close-edit-modal-button" class="mt-4 bg-red-500 text-white px-4 py-2 rounded">Close</button>
+  </div>
+</div>
+
+
+<%= render 'modal' %>

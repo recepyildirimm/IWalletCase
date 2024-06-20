@@ -1,0 +1,48 @@
+<div class="w-full overflow-x-auto">
+  <table class="w-full">
+    <thead>
+      <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+        <th class="px-4 py-3">Photo</th>
+        <th class="px-4 py-3">Name</th>
+        <th class="px-4 py-3">Username</th>
+        <th class="px-4 py-3">Show</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white">
+      <% if @users.any? %>
+        <% @users.each do |user| %>
+          <tr class="text-gray-700">   
+            <td class="px-4 py-3 border">
+              <% if user.photo.present? %>
+                <div class="flex items-center justify-center">
+                  <div class="relative w-12 h-12 mr-3 rounded-full">
+                    <%= image_tag user.photo, class: "object-cover w-full h-full rounded-full" %>                      
+                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                  </div>
+                </div>
+              <% else %>
+                <div class="flex items-center justify-center">
+                  <div class="relative w-12 h-12 mr-3 rounded-full">
+                    <img class="object-cover w-full h-full rounded-full" src="<%= user['photo_url'] %>" alt="User Image" loading="lazy" />
+                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                  </div>
+                </div>
+              <% end %>
+            </td>
+            <td class="px-4 py-3 border"><%= user['name'] %></td>
+            <td class="px-4 py-3 border"><%= user['username'] %></td>
+            <td class="px-4 py-3 border">
+              <%= link_to user_path(user) do %>
+                <i class="fas fa-edit"></i> 
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="4" class="px-4 py-3 border text-center">Kullanıcı Bulunamadı!</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

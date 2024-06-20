@@ -1,0 +1,30 @@
+
+            <tr class="text-gray-700">   
+              <td class="px-4 py-3 border">
+                <%if user.photo.present?%>
+                <div class="flex items-center justify-center">
+                    <div class="relative w-12 h-12 mr-3 rounded-full">
+        <%= image_tag user.photo, class: "object-cover w-full h-full rounded-full" %>                      
+      <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                    </div>
+                  </div>
+                <% else %>
+               
+                  <div class="flex items-center justify-center">
+                    <div class="relative w-12 h-12 mr-3 rounded-full">
+                      <img class="object-cover w-full h-full rounded-full" src="<%= user['photo_url'] %>" alt="User Image" loading="lazy" />
+                      <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                    </div>
+                  </div>
+                
+                <% end %>
+              </td>
+              <td class="px-4 py-3 border"><%= user['name'] %></td>
+              <td class="px-4 py-3 border"><%= user['username'] %></td>
+              <td class="px-4 py-3 border">
+                <%= link_to user_path(user) do %>
+                <i class="fas fa-edit"></i> 
+                <% end %>
+              </td>
+            </tr>
+      
